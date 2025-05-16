@@ -9,7 +9,7 @@ import {
   SelectValue,
 } from "./ui/select";
 import { cn } from "@/lib/utils";
-import { Sparkles, Zap, Info, Bolt, Code, Brain, Lightbulb, Image, Gauge, Rocket, Bot } from "lucide-react";
+import { Sparkles, Zap, Info, Bolt, Code, Brain, Lightbulb, Image, Gauge, Rocket, Bot, Globe } from "lucide-react";
 import { useState, useEffect } from "react";
 
 interface ModelPickerProps {
@@ -43,6 +43,8 @@ export const ModelPicker = ({ selectedModel, setSelectedModel }: ModelPickerProp
         return <Sparkles className="h-3 w-3 text-blue-500" />;
       case 'xai':
         return <Sparkles className="h-3 w-3 text-yellow-500" />;
+      case 'openrouter':
+        return <Globe className="h-3 w-3 text-cyan-600" />;
       default:
         return <Info className="h-3 w-3 text-blue-500" />;
     }
@@ -96,6 +98,8 @@ export const ModelPicker = ({ selectedModel, setSelectedModel }: ModelPickerProp
         return "bg-rose-100 text-rose-800 dark:bg-rose-900/30 dark:text-rose-300";
       case 'agentic':
         return "bg-cyan-100 text-cyan-800 dark:bg-cyan-900/30 dark:text-cyan-300";
+      case 'openrouter':
+        return "bg-sky-100 text-sky-800 dark:bg-sky-900/30 dark:text-sky-300";
       default:
         return "bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300";
     }

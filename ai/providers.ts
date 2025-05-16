@@ -2,6 +2,7 @@ import { createOpenAI } from "@ai-sdk/openai";
 import { createGroq } from "@ai-sdk/groq";
 import { createAnthropic } from "@ai-sdk/anthropic";
 import { createXai } from "@ai-sdk/xai";
+import { createOpenRouter } from "@openrouter/ai-sdk-provider";
 
 import { 
   customProvider, 
@@ -53,6 +54,10 @@ const xaiClient = createXai({
   apiKey: getApiKey('XAI_API_KEY'),
 });
 
+const openrouterClient = createOpenRouter({
+  apiKey: getApiKey('OPENROUTER_API_KEY'),
+});
+
 const languageModels = {
   "gpt-4.1-mini": openaiClient("gpt-4.1-mini"),
   "claude-3-7-sonnet": anthropicClient('claude-3-7-sonnet-20250219'),
@@ -63,6 +68,10 @@ const languageModels = {
     }
   ),
   "grok-3-mini": xaiClient("grok-3-mini-latest"),
+  "openrouter-deepseek-chat-v3": openrouterClient("deepseek/deepseek-chat-v3-0324:free"),
+  "openrouter-deepseek-r1": openrouterClient("deepseek/deepseek-r1:free"),
+  "openrouter-gemini-flash": openrouterClient("google/gemini-2.0-flash-exp:free"),
+  "openrouter-llama-4-maverick": openrouterClient("meta-llama/llama-4-maverick:free"),
 };
 
 export const modelDetails: Record<keyof typeof languageModels, ModelInfo> = {
@@ -93,6 +102,34 @@ export const modelDetails: Record<keyof typeof languageModels, ModelInfo> = {
     description: "Latest version of XAI's Grok 3 Mini with strong reasoning and coding capabilities.",
     apiVersion: "grok-3-mini-latest",
     capabilities: ["Reasoning", "Efficient", "Agentic"]
+  },
+  "openrouter-deepseek-chat-v3": {
+    provider: "OpenRouter",
+    name: "DeepSeek Chat V3 (Free)",
+    description: "DeepSeek's Chat V3 model via OpenRouter, strong at reasoning, coding, and general chat.",
+    apiVersion: "deepseek/deepseek-chat-v3-0324:free",
+    capabilities: ["Reasoning", "Coding", "General", "OpenRouter"]
+  },
+  "openrouter-deepseek-r1": {
+    provider: "OpenRouter",
+    name: "DeepSeek R1 (Free)",
+    description: "DeepSeek's R1 model via OpenRouter, excels at research, reasoning, and creative tasks.",
+    apiVersion: "deepseek/deepseek-r1:free",
+    capabilities: ["Research", "Reasoning", "Creative", "OpenRouter"]
+  },
+  "openrouter-gemini-flash": {
+    provider: "OpenRouter",
+    name: "Gemini 2.0 Flash (Free)",
+    description: "Google's Gemini 2.0 Flash experimental model via OpenRouter, fast and efficient for general and vision tasks.",
+    apiVersion: "google/gemini-2.0-flash-exp:free",
+    capabilities: ["Fast", "Efficient", "Vision", "General", "OpenRouter"]
+  },
+  "openrouter-llama-4-maverick": {
+    provider: "OpenRouter",
+    name: "Llama 4 Maverick (Free)",
+    description: "Meta's Llama 4 Maverick model via OpenRouter, strong at reasoning, coding, and agentic tasks.",
+    apiVersion: "meta-llama/llama-4-maverick:free",
+    capabilities: ["Reasoning", "Coding", "Agentic", "OpenRouter"]
   },
 };
 
